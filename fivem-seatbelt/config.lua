@@ -1,4 +1,4 @@
 Cfg             = {}
-Cfg.DiffTrigger = 0.255 
-Cfg.MinSpeed    = 19.25 --THIS IS IN m/s
-Cfg.Strings     = { belt_on = 'Turvavyö ^5 kiinni^0.', belt_off = 'Turvavyö ^1 auki^0.' }
+Cfg.DiffTrigger = 0.500 
+Cfg.MinSpeed    = 25.0 --THIS IS IN m/s
+Cfg.Strings     = { belt_on = 'Seatbelt fastened^0.', belt_off = 'Seatbelt unfastened^0.' }

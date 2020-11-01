@@ -34,9 +34,11 @@ Citizen.CreateThread(function()
 			
 			if speedBuffer[2] ~= nil 
 			   and not beltOn
-			   and GetEntitySpeedVector(car, true).y > 1.0  
-			   and speedBuffer[1] > Cfg.MinSpeed 
-			   and (speedBuffer[2] - speedBuffer[1]) > (speedBuffer[1] * Cfg.DiffTrigger) then
+			   -- car is going forward, account for recoil when hitting an object
+			   and GetEntitySpeedVector(car, true).y > -20.0
+			   -- use previous speed to determine if threshold high enough
+			   and speedBuffer[2] > Cfg.MinSpeed 
+			   and (speedBuffer[2] - speedBuffer[1]) > (speedBuffer[2] * Cfg.DiffTrigger) then
 			   
 				local co = GetEntityCoords(ped)
 				local fw = Fwv(ped)
