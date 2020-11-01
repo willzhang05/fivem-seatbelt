@@ -11,5 +11,5 @@ Edit Config.Strings to change language
 Note: You have to open your seatbelt to leave the vehicle.
 
 
-
+API docs for development: https://runtime.fivem.net/doc/natives/
 
