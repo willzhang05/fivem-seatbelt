@@ -12,4 +12,5 @@ Note: You have to open your seatbelt to leave the vehicle.
 
 
 API docs for development: https://runtime.fivem.net/doc/natives/
+Statistics for random ejection thresholds: https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/809199
 

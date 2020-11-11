@@ -3,6 +3,8 @@ local speedBuffer  = {}
 local velBuffer    = {}
 local beltOn       = false
 local wasInCar     = false
+local toEject	   = 1.0
+local ejectRate    = 0.0
 
 IsCar = function(veh)
 		    local vc = GetVehicleClass(veh)
@@ -32,7 +34,16 @@ Citizen.CreateThread(function()
 			speedBuffer[2] = speedBuffer[1]
 			speedBuffer[1] = GetEntitySpeed(car)
 			
-			if speedBuffer[2] ~= nil 
+			toEject = math.random()
+
+			if speedBuffer[1] ~= nil and speedBuffer[2]  ~= nil then
+				ejectRate = Cfg.BaseEjectRate + Cfg.EjectRateScale * (speedBuffer[2] - speedBuffer[1])
+			else
+				ejectRate = Cfg.BaseEjectRate
+			end
+
+			if toEject < ejectRate
+			   and speedBuffer[2] ~= nil 
 			   and not beltOn
 			   -- car is going forward, account for recoil when hitting an object
 			   and GetEntitySpeedVector(car, true).y > -20.0
@@ -45,9 +56,11 @@ Citizen.CreateThread(function()
 				SetEntityCoords(ped, co.x + fw.x, co.y + fw.y, co.z - 0.47, true, true, true)
 				SetEntityVelocity(ped, velBuffer[2].x, velBuffer[2].y, velBuffer[2].z)
 				Citizen.Wait(1)
+				-- break windshield
+				SmashVehicleWindow(car, 6)
 				SetPedToRagdoll(ped, 1000, 1000, 0, 0, 0, 0)
 			end
-				
+			
 			velBuffer[2] = velBuffer[1]
 			velBuffer[1] = GetEntityVelocity(car)
 				
